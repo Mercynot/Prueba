@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/tvNombres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MARCIAL X GUSTAVO"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"/>
+    <TextView
+        android:id="@+id/tvBienvenida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"/>
+    <Button
+        android:id="@+id/btnIrPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ir a Perfil" />
+    <Button
+        android:id="@+id/btnAbrirWeb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abrir Web Santo Tomás" />
+    <Button
+        android:id="@+id/btnEnviarCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Correo" />
+    <Button
+        android:id="@+id/btnCompartir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Compartir Texto" />
+
+    <Button
+        android:id="@+id/btnLinterna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Encender Linterna" />
+    <Button
+        android:id="@+id/btnCamara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Abrir Cámara" />
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guía de Uso (FAQ)"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. ¿Cómo tomar una foto?\nVe al menú principal y presiona 'Abrir Cámara'.\n\n2. ¿Cómo encender la linterna?\nPresiona el botón de 'Encender Linterna' en el inicio.\n\n3. ¿Cómo editar mi nombre?\nVe a 'Ir a Perfil', ingresa tu nombre y presiona guardar."
+        android:textSize="16sp"
+        android:lineSpacingExtra="8dp"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volver" />
+
+</LinearLayout>
