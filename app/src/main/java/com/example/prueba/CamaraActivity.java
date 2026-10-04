@@ -23,7 +23,7 @@ public class CamaraActivity extends AppCompatActivity {
     private ImageView imagenPrevia;
     private Uri urlImagen;
 
-    // parametros permisos
+    // parametros permisos :V
     private final ActivityResultLauncher<String> permisoCamaraLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), carga -> {
                 if (carga) tomarFoto();

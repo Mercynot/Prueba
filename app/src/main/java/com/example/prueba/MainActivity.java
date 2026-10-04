@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-    // pedir permiso de camara
+    // pedir permiso de camara :v
     private final ActivityResultLauncher<String> permisoCamaraLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), granted -> {
                 if (granted) {

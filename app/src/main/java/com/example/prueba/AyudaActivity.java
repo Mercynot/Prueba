@@ -13,7 +13,7 @@ public class AyudaActivity extends AppCompatActivity {
 
         Button btnVolver = findViewById(R.id.btnVolver);
 
-        // boton para devolverse
+        // boton para devolverse :v
         btnVolver.setOnClickListener(v -> finish());
     }
 }

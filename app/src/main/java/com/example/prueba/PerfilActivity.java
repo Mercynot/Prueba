@@ -29,7 +29,7 @@ public class PerfilActivity extends AppCompatActivity {
             finish();
         });
 
-        // intent implicito para abrir ubicación en gogle Maps
+        // intent implicito para abrir ubicación en gogle Maps :V
         btnMapa.setOnClickListener(v -> {
 
             Uri gmmIntentUri = Uri.parse("geo:-33.5284,-70.6627?q=Santo Tomas");
