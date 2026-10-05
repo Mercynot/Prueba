@@ -26,35 +26,35 @@ public class CamaraActivity extends AppCompatActivity {
     // parametros permisos :V
     private final ActivityResultLauncher<String> permisoCamaraLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), carga -> {
-                if (carga) tomarFoto();
-                else Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show();
+                if (carga) tomarFoto(); //si el usuario permite carga metodo
+                else Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show(); // si no toast
             });
 
     // parametro para tomar la foto y recibir el resultado
-    private final ActivityResultLauncher<Uri> takePictureLauncher =
+    private final ActivityResultLauncher<Uri> takePictureLauncher = //espera que la camara haga su pega
             registerForActivityResult(new ActivityResultContracts.TakePicture(), okay -> {
-                if (okay && urlImagen != null) {
+                if (okay && urlImagen != null) { // si sale tod0 bien la foto se aguarda
                     imagenPrevia.setImageURI(urlImagen);
                     Toast.makeText(this, "Foto guardada", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Captura cancelada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Captura cancelada", Toast.LENGTH_SHORT).show(); // si no se cancela y envia un toast
                 }
             });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camara);
+        setContentView(R.layout.activity_camara); // se le coloca el diseño
 
-        Button btnTomarFoto = findViewById(R.id.btnTomarFoto);
+        Button btnTomarFoto = findViewById(R.id.btnTomarFoto); // conecto el boton con su id diseño
         imagenPrevia = findViewById(R.id.imgPreview);
 
-        btnTomarFoto.setOnClickListener(v -> checkPermisoYTomar());
+        btnTomarFoto.setOnClickListener(v -> checkPermisoYTomar()); //ejectuo metodo para que no crashe si faltan permiso
     }
 
 
 
-    private void checkPermisoYTomar() {
+    private void checkPermisoYTomar() { //valida si el usuario tiene permisos para ocupar la camara sino le sale la solicitud
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             tomarFoto();
         } else {
@@ -68,15 +68,15 @@ public class CamaraActivity extends AppCompatActivity {
 
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             File storageDir = getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES);
-            fotoArchivo = File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);
+            fotoArchivo = File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);   //archivo temporal vacio en el directorio de iamagen del clu
         } catch (IOException ex) {
             Toast.makeText(this, "Error al crear archivo", Toast.LENGTH_SHORT).show();
         }
 
         if (fotoArchivo != null) {
-
+               //implemento  fileprovider para q tnega una url segura
             urlImagen = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", fotoArchivo);
-            takePictureLauncher.launch(urlImagen);
+            takePictureLauncher.launch(urlImagen); // deposito de foto
         }
     }
 }

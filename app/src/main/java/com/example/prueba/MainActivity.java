@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
             });
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {  //indico cual es su view al main
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //elementos visuales
         tvBienvenida = findViewById(R.id.tvBienvenida);
         Button btnIrPerfil = findViewById(R.id.btnIrPerfil);
         Button btnAbrirWeb = findViewById(R.id.btnAbrirWeb);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         btnLinterna = findViewById(R.id.btnLinterna);
         Button btnCamara = findViewById(R.id.btnCamara);
 
-        // datos del Login
+
         emailUsuario = getIntent().getStringExtra("email_usuario");
         if (emailUsuario == null) emailUsuario = "";
         tvBienvenida.setText("Bienvenido: " + emailUsuario);
@@ -74,24 +74,24 @@ public class MainActivity extends AppCompatActivity {
             editarPerfilLauncher.launch(i);
         });
 
-        // intent implícito abrir web
+        // intent implícito abrir web con un ACtionVIEW
         btnAbrirWeb.setOnClickListener(v -> {
             Uri uri = Uri.parse("https://www.santotomas.cl");
             Intent viewWeb = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(viewWeb);
         });
 
-        // intent implícito enviar correo
+        // intent implícito enviar correo con action_sendto
         btnEnviarCorreo.setOnClickListener(v -> {
             Intent email = new Intent(Intent.ACTION_SENDTO);
-            email.setData(Uri.parse("mailto:")); // Solo apps de correo
+            email.setData(Uri.parse("mailto:")); //para que solo abra aplicacion de correo
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{emailUsuario});
             email.putExtra(Intent.EXTRA_SUBJECT, "Prueba desde la app");
             email.putExtra(Intent.EXTRA_TEXT, "Hola, esto es un intento de correo.");
             startActivity(Intent.createChooser(email, "Enviar correo con:"));
         });
 
-        // intent implícito compartir texto
+        // intent implícito compartir texto con un Action_send y con el chooser obligo al android a que desplege menu para compartir
         btnCompartir.setOnClickListener(v -> {
             Intent share = new Intent(Intent.ACTION_SEND);
             share.setType("text/plain");
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(share, "Compartir usando:"));
         });
 
-
+        // llamo al camaramanager y hace un bucle para escanear sus camaras que tengan flash y camara trasera
         camara = (CameraManager) getSystemService(CAMERA_SERVICE);
         try {
             for (String id : camara.getCameraIdList()) {
@@ -114,22 +114,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } catch (CameraAccessException e) {
-            Toast.makeText(this, "No se puede acceder a la cámara", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No se puede acceder a la cámara", Toast.LENGTH_SHORT).show();  //try y catch para capturar erroes
         }
 
 
         btnLinterna.setOnClickListener(v -> {
             if (camaraID == null) {
-                Toast.makeText(this, "Este dispositivo no tiene flash disponible", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Este dispositivo no tiene flash disponible", Toast.LENGTH_SHORT).show();   // si no tiene flash
                 return;
             }
 
-            boolean camGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            boolean camGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)  // y si tiene checkselmission para ver si tiene permisos para ocuparlos
                     == PackageManager.PERMISSION_GRANTED;
             if (camGranted) {
                 alternarluz();
             } else {
-                permisoCamaraLauncher.launch(Manifest.permission.CAMERA);
+                permisoCamaraLauncher.launch(Manifest.permission.CAMERA);   //si no tiene permiso
             }
         });
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         btnCamara.setOnClickListener(v ->
                 startActivity(new Intent(this, CamaraActivity.class)));
 
-
+        //simulo cargas en segundo plano uso runOnUiThread para evitar crasheos o congelau
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-
+     //metodo para invertir valor de luz en ves de false que sea true :V
     private void alternarluz() {
         try {
             luz = !luz;
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause() {  //para apagar la luz si se minimiza
         super.onPause();
         if (camaraID != null && luz) {
             try {
